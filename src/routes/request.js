@@ -56,6 +56,7 @@ requestRouter.post("/request/:status/:toUserId",userAuth, async (req,res) =>{
     }
 })
 // for all the pending interested states we want the api 
+// note that we are getting the requestId and not fromuserid or touserid
 requestRouter.post("/request/review/:status/:requestId",userAuth,async (req,res) =>{
     try{
         const loggedInUser = req.user;
