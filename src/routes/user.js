@@ -12,7 +12,7 @@ userRouter.get("/user/pending-request",userAuth, async(req,res) =>{
         const connections = await ConnectionRequest.find({
            toUserId : loggedInUser._id,
            status : "interested" 
-        }).populate("fromUserId",["firstName","lastName"]);
+        }).populate("fromUserId",["firstName","lastName","age","gender","photoUrl","about","skills"]);
         res.send(connections);
         
     } catch (error) {
@@ -36,8 +36,8 @@ userRouter.get("/user/connections",userAuth,async (req,res) =>{
             status : "accepted"
 
         })
-        .populate("fromUserId",["firstName","lastName"])
-        .populate("toUserId",["firstName","lastName"]);
+        .populate("fromUserId",["firstName","lastName","age","gender","photoUrl","about","skills"])
+        .populate("toUserId",["firstName","lastName","age","gender","photoUrl","about","skills"])
 
         const connections = connectionWithUser.map((connection) => {
             if(connection.fromUserId._id.toString() === loggedInUser._id.toString()){
@@ -76,7 +76,7 @@ userRouter.get("/user/feed",userAuth,async (req,res) =>{
                 { _id : {$ne : loggedInUser._id}}
             ]
         })
-        .select("firstName lastName about skills")
+        .select(["firstName","lastName","age","gender","photoUrl","about","skills"])
         .skip(skip)
         .limit(limit);
         res.send(feedUsers);
