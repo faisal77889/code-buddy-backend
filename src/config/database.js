@@ -5,8 +5,6 @@ const connectDB = async () => {
         await mongoose.connect('mongodb+srv://faisal77889:2l7aGTdj0Wc9Idjl@firstcluster.aaq3r.mongodb.net/Helloworld',{
             useNewUrlParser: true,
             useUnifiedTopology: true,
-            useFindAndModify: false,
-            useCreateIndex: true,
         });
         console.log("Connected to MongoDB");
     } catch (error) {
