@@ -10,29 +10,45 @@ const cors = require('cors');
 const { initializeSocket } = require("./Utils/socket");
 
 const app = express();
+
+// Set up PORT, ensuring it listens to Render's environment variable
 const PORT = process.env.PORT || 7777; // PORT setup here
 
+// CORS setup (for local development, update when deploying)
 app.use(cors({
-    origin: "http://localhost:5173",
-    credentials: true,
+    origin: "http://localhost:5173",  // Change this to your frontend URL for production (e.g., Render URL)
+    credentials: true, // Allow credentials (cookies, headers)
 }));
 
+// Middleware to parse cookies and JSON data from requests
 app.use(cookieParser());
-app.use(express.json());
+app.use(express.json()); // JSON body parsing middleware (important for POST requests)
+
+// Routes
 app.use("/", authRouter);
 app.use("/", profileRouter);
 app.use("/", requestRouter);
 app.use("/", userRouter);
 
+// **Home Route** - Accessible at '/'
+app.get('/', (req, res) => {
+    res.json({ message: "Welcome to the Home route!" });
+});
+
+// Create an HTTP server for handling sockets
 const httpServer = http.createServer(app);
 
+// Initialize socket.io (if you're using websockets)
 initializeSocket(httpServer);
 
+// Connect to the database and start the server
 connectDB()
     .then(() => {
         console.log("connected to the database cluster successfully");
+
+        // Start listening on the configured port
         httpServer.listen(PORT, () => {
-            console.log(`server is listening on port ${PORT}`);
+            console.log(`Server is listening on port ${PORT}`);
         });
     })
     .catch((err) => {
