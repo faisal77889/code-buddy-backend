@@ -31,9 +31,7 @@ app.use("/", requestRouter);
 app.use("/", userRouter);
 
 // **Home Route** - Accessible at '/'
-app.get('/', (req, res) => {
-    res.json({ message: "Welcome to the Home route!" });
-});
+
 
 // Create an HTTP server for handling sockets
 const httpServer = http.createServer(app);
