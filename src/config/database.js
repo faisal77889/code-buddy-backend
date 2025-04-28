@@ -1,15 +1,12 @@
-const mongoose = require('mongoose');
-
+const mongoose = require("mongoose");
 const connectDB = async () => {
     try {
-        await mongoose.connect('mongodb+srv://faisal77889:2l7aGTdj0Wc9Idjl@firstcluster.aaq3r.mongodb.net/Helloworld');
-        console.log("Connected to MongoDB");
+        await mongoose.connect('mongodb+srv://faisal77889:2l7aGTdj0Wc9Idjl@firstcluster.aaq3r.mongodb.net/Helloworld'); 
     } catch (error) {
-        console.error("Error connecting to MongoDB:", error.message);
-        process.exit(1);  // Exit the process if MongoDB connection fails
+        console.log(error.message);
     }
-};
-
+     
+} 
 module.exports = connectDB;
 
 // as mongoose.connect will connect to the cluster provided  but after a / we have writtten the helloworld implying that we want to create a database with the number of helloworld inside our given cluster
