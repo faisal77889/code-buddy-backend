@@ -26,12 +26,12 @@ app.use(express.json()); // JSON body parsing middleware (important for POST req
 
 // Routes
             //new added 
-            app.get('/',(req,res)=>{
-                res.send({
-                    activeStatus:true,
-                    error:false
-                })
-            })
+            // app.get('/',(req,res)=>{
+            //     res.send({
+            //         activeStatus:true,
+            //         error:false
+            //     })
+            // })
 
 app.use("/", authRouter);
 app.use("/", profileRouter);
