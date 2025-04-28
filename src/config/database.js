@@ -2,10 +2,7 @@ const mongoose = require('mongoose');
 
 const connectDB = async () => {
     try {
-        await mongoose.connect('mongodb+srv://faisal77889:2l7aGTdj0Wc9Idjl@firstcluster.aaq3r.mongodb.net/Helloworld',{
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
+        await mongoose.connect('mongodb+srv://faisal77889:2l7aGTdj0Wc9Idjl@firstcluster.aaq3r.mongodb.net/Helloworld');
         console.log("Connected to MongoDB");
     } catch (error) {
         console.error("Error connecting to MongoDB:", error.message);
